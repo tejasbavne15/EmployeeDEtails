@@ -1,0 +1,106 @@
+ <div style="background-color: black; color: white;" class="container-fluid d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-black border-bottom shadow-sm">
+    <h5 class="my-0 mr-md-auto font-weight-normal">
+      SAMSUNG
+    </h5>
+    <nav class="my-2 my-md-0 mr-md-3 ">
+      <a class="p-2"  >Employee</a>
+      <a class="p-2"  >Shop</a>
+      <a class="p-2" href="#">Enterprise</a>
+      <a class="p-2" href="#">Support</a>
+      <a class="p-2" href="#">Pricing</a>
+    </nav>
+    <a class="btn btn-primary">Sign up</a>
+    <a class=" btn btn-outline-secondary">Login</a>
+</div>
+
+<div class="container">
+  <div class="row justify-content-center p-3">
+    <h5 style="color: brown;" class="my-0 mr-md-auto font-weight-normal">
+      <span class="fa fa-briefcase"></span>Employee Details
+    </h5>
+  </div>
+  <div>
+    <div class="from-group">
+      <fieldset>Name</fieldset>
+       <legend><input type="text" class="form-control" [(ngModel)]="employeeName" placeholder="Enter Employee Name.."></legend>
+     </div>
+   
+     <div class="from-group">
+       <fieldset>Age</fieldset>
+        <legend><input type="number" class="form-control" [(ngModel)]="employeeAge" placeholder="Enter Employee Age"></legend>
+      </div>
+   
+      <div class="from-group">
+       <fieldset>Address</fieldset>
+        <legend><input type="address" class="form-control" [(ngModel)]="employeeAddress" placeholder="Enter Employee Address"></legend>
+      </div>
+   
+      <div class="from-group">
+       <fieldset>Number</fieldset>
+        <legend><input type="mobile" class="form-control"  [(ngModel)]="employeeMobile" placeholder="Enter Mobile Number"></legend>
+      </div>
+   
+      <div class="from-group">
+          <button class="btn btn-primary" (click)="CreateRecord()" [disabled]="!employeeName || !employeeAge || !employeeAddress">Create Employee</button>
+      </div>
+  </div>
+   <div class="form-group">
+     <h4><b>{{message}}</b></h4>
+   </div>
+
+   <div class="row p-2">
+     <div class="col-md-12 p-2 justify-content-center">
+      <h4>All Employee Data</h4>
+     </div>
+     <div class="col-md-3" *ngFor="let item of employee">
+       <div class="card" *ngIf="!item.isedit; else elseBlock">
+         <div class="card-body">
+           <div class="card-title">
+             Name:{{item.name}}
+           </div>
+           <div class="card-subtitle">
+            Age:{{item.age}}
+           </div>
+           <div class="card-subtitle">
+            Address:{{item.address}}
+           </div>
+           <div class="card-text">
+            Mobile No:{{item.mobile}}
+           </div>
+           <span><a (click)="EditRecord(item)" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span>Edit Details</a>
+            <a (click)="Deleteemployee(item.id)" class="btn btn-primary btn-xs"><span class="fa fa-trash"></span>Delete</a>
+          </span>
+         </div>
+       </div>
+       <ng-template #elseBlock>
+        <div class="card">
+          <div class="card-body">
+              <div class="card-title">
+                  Edit Employee
+              </div>
+              <div class="row">
+                  <div class="form-group">
+                      <div class="col-md-12">
+                          <input type="text" [(ngModel)]="item.editname" class="form-control">
+                      </div>
+                      <div class="col-md-12">
+                          <input type="number" [(ngModel)]="item.editage" class="form-control">
+                      </div>
+                      <div class="col-md-12">
+                        <input type="number" [(ngModel)]="item.editmobile" class="form-control">
+                    </div>
+                      <div class="col-md-12">
+                          <input type="text" [(ngModel)]="item.editaddress" class="form-control">
+                      </div>
+                  </div>
+              </div>
+
+              <a class="btn btn-danger btn-xs" (click)="item.isedit = false">Cancel</a>
+              <a  class="btn btn-primary btn-xs" (click)="Updatarecord(item)">Update</a>
+         
+          </div>
+      </div>
+       </ng-template>
+     </div>
+   </div>
+</div>
